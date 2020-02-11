@@ -89,7 +89,7 @@ docker exec -it stackof_server_1 dgraph bulk -f rdf/posts.rdf.gz -s so.schema --
 ```
 
 # A Sample Composite Query
-```
+```yaml
 {
   
 questions(func: eq(Type, "Question"), orderdesc: Timestamp, first: 100) {
