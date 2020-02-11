@@ -1,3 +1,8 @@
+# Setting up Ratel
+```
+http://<HOST>:8080/
+```
+
 # curl cmd to post schema
 ```
 curl -H "Content-Type: application/rdf" -X POST localhost:8080/alter?commitNow=true -d $'
@@ -78,3 +83,6 @@ for category in posts comments tags users votes; do docker exec -it stackof_serv
 
 docker exec -it stackof_server_1 dgraph bulk -f rdf/posts.rdf.gz -s so.schema --map_shards=4 --reduce_shards=1 --http localhost:8000 --zero=192.168.16.2:5080
 ```
+
+# Notes
+1. You may need to restart dgprah server and/or zero to see the loaded data
