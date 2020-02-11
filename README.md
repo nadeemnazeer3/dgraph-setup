@@ -88,5 +88,79 @@ for category in posts comments tags users votes; do docker exec -it stackof_serv
 docker exec -it stackof_server_1 dgraph bulk -f rdf/posts.rdf.gz -s so.schema --map_shards=4 --reduce_shards=1 --http localhost:8000 --zero=192.168.16.2:5080
 ```
 
+# A Sample Composite Query
+```
+{
+  
+questions(func: eq(Type, "Question"), orderdesc: Timestamp, first: 100) {
+  
+uid
+Id
+
+Title {
+  Text
+}
+
+Owner {
+  DisplayName
+  Reputation
+  uid
+}
+
+Tag {
+  TagName: Tag.Text
+}
+
+Has.Answer(orderdesc: Timestamp, first: 1) {
+  Owner {
+    DisplayName
+    Reputation
+    uid
+  }
+  Timestamp
+}
+
+ChosenAnswerCount: count(Chosen.Answer)
+UpvoteCount: count(Upvote)
+DownvoteCount: count(Downvote)
+AnswerCount: count(Has.Answer)
+ViewCount
+Timestamp
+
+}
+
+  
+t as var(func: eq(Type, "Tag")) {
+  c as count(~Tag)
+}
+
+topTags(func: uid(t), orderdesc: val(c), first: 10) {
+  uid
+  TagName: Tag.Text
+  QuestionCount: val(c)
+}
+
+  
+var(func: eq(Type, "Question"), orderdesc: Timestamp, first: 50)  @filter(has(Chosen.Answer)) {
+  ca as Chosen.Answer
+}
+
+var(func: uid(ca)) @groupby(Owner) {
+  a as count(uid)
+}
+
+topUsers(func: uid(a), orderdesc: val(a)) {
+  uid
+  AboutMe
+  DisplayName
+  Reputation
+  NumAcceptedAnswers: val(a)
+}
+
+}
+```
+
 # Notes
 1. You may need to restart dgprah server and/or zero to see the loaded data
+
+
