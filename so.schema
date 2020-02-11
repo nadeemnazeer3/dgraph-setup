@@ -1,0 +1,29 @@
+<AboutMe>: string .
+<Author>: [uid] @reverse .
+<Body>: [uid] @reverse .
+<Chosen.Answer>: [uid] @count .
+<Comment>: [uid] @reverse .
+<CreationDate>: default .
+<DisplayName>: string .
+<Downvote>: [uid] @reverse .
+<GitHubID>: string @index(hash) .
+<Has.Answer>: [uid] @count @reverse .
+<Id>: default .
+<LastAccessDate>: default .
+<Location>: string .
+<Owner>: [uid] @reverse .
+<Post>: [uid] @reverse .
+<PostCount>: int @index(int) .
+<Reputation>: int .
+<Score>: int .
+<Tag.Text>: string @index(hash) .
+<Tag>: [uid] @reverse .
+<TagName>: default .
+<Tags>: [uid] @reverse .
+<Text>: string @index(fulltext) .
+<Timestamp>: datetime .
+<Title>: [uid] @reverse .
+<Type>: string @index(exact) .
+<Upvote>: [uid] @reverse .
+<ViewCount>: int @index(int) .
+<Vote>: [uid] @reverse .
