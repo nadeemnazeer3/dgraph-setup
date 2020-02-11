@@ -1,3 +1,5 @@
+# curl cmd to post schema
+```
 curl -H "Content-Type: application/rdf" -X POST localhost:8080/alter?commitNow=true -d $'
 AboutMe: string .
 Author: [uid] @reverse .
@@ -25,8 +27,10 @@ Upvote: [uid] @reverse .
 Downvote: [uid] @reverse .
 Tag: [uid] @reverse .
 '
+```
 
-
+# Sample Schema
+```
 <AboutMe>: string .
 <Author>: [uid] @reverse .
 <Body>: [uid] @reverse .
@@ -56,11 +60,21 @@ Tag: [uid] @reverse .
 <Upvote>: [uid] @reverse .
 <ViewCount>: int @index(int) .
 <Vote>: [uid] @reverse .
+```
 
+# How to use dgraphloader
+```
 for category in comments posts tags users votes; do docker exec -it dgraph dgraphloader -r $category.rdf.gz; done
+```
 
+# How to use dgraph live
+```
 for category in comments posts tags users votes; do docker exec -it stackof_server_1 dgraph live -f rdf/$category.rdf.gz --alpha 172.25.0.3:9080 --zero 172.25.0.2:5080 -c 1; done
+```
 
+# How to use dgraph bulk
+```
 for category in posts comments tags users votes; do docker exec -it stackof_server_1 dgraph bulk -f rdf/$category.rdf.gz -s so.schema --map_shards=4 --reduce_shards=1 --http localhost:8000 --zero=192.168.48.2:5080; done
 
 docker exec -it stackof_server_1 dgraph bulk -f rdf/posts.rdf.gz -s so.schema --map_shards=4 --reduce_shards=1 --http localhost:8000 --zero=192.168.16.2:5080
+```
