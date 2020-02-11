@@ -1,3 +1,7 @@
+# What all we need
+Check docker-compose.yml
+# How to start
+```docker-compose up -d```
 # Setting up Ratel
 ```
 http://<HOST>:8080/
