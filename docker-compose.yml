@@ -3,7 +3,7 @@ services:
   zero:
     image: dgraph/dgraph:latest
     volumes:
-      - /mnt/volume_nyc3_02/stackof/dgraph:/dgraph
+      - /dgraph:/dgraph
     ports:
       - 5080:5080
       - 6080:6080
@@ -12,7 +12,7 @@ services:
   server:
     image: dgraph/dgraph:latest
     volumes:
-      - /mnt/volume_nyc3_02/stackof/dgraph:/dgraph
+      - /dgraph:/dgraph
     ports:
       - 8080:8080
       - 9080:9080
