@@ -6,7 +6,8 @@ Check docker-compose.yml
 ```
 http://<HOST>:8080/
 ```
-
+#How to setup on ubuntu:
+https://medium.com/@praveenkumarpalai/installing-dgraph-on-ubuntu-the-simple-way-9f1634935a6
 # curl cmd to post schema
 ```
 curl -H "Content-Type: application/rdf" -X POST localhost:8080/alter?commitNow=true -d $'
